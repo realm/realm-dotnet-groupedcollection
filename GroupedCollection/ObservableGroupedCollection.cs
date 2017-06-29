@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Realms.GroupedCollection
 {
-    internal abstract class RealmObservableCollection<TKey, TValue>
+    internal abstract class ObservableGroupedCollection<TKey, TValue>
         : IReadOnlyList<TValue>, INotifyCollectionChanged, INotifyPropertyChanged
     {
         private readonly IRealmCollection<TKey> _collection;
@@ -65,7 +65,7 @@ namespace Realms.GroupedCollection
 
         public TValue this[int index] => _converter(_collection[index]);
 
-		protected RealmObservableCollection(IRealmCollection<TKey> collection, Func<TKey, TValue> converter)
+        protected ObservableGroupedCollection(IRealmCollection<TKey> collection, Func<TKey, TValue> converter)
         {
             _collection = collection;
             _converter = converter;
@@ -125,10 +125,10 @@ namespace Realms.GroupedCollection
 
         private class Enumerator : IEnumerator<TValue>
         {
-            private readonly RealmObservableCollection<TKey, TValue> _collection;
+            private readonly ObservableGroupedCollection<TKey, TValue> _collection;
             private int _index;
 
-            internal Enumerator(RealmObservableCollection<TKey, TValue> collection)
+            internal Enumerator(ObservableGroupedCollection<TKey, TValue> collection)
             {
                 _index = -1;
                 _collection = collection;

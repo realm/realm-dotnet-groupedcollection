@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Realms.GroupedCollection;
 using Realms;
+using Realms.GroupedCollection;
 
 /// <summary>
 /// A set of extension methods over Realm collections to generate grouped collections.
@@ -15,7 +15,7 @@ public static class ExtensionMethods
         where TKey : RealmObject
         where TValue : RealmObject
     {
-        return new GroupedRealmCollection<TKey, TValue>(collection, valueSelector);
+        return new GroupedCollection<TKey, TValue>(collection, valueSelector);
     }
 
     internal static IGroupedCollection<TKey, TValue> ToGroupedCollection<TKey, TValue>(this IQueryable<TKey> collection, Func<TKey, IRealmCollection<TValue>> valueSelector)
@@ -38,6 +38,8 @@ public static class ExtensionMethods
     /// <returns>The grouped collection.</returns>
     /// <param name="collection">The query to group.</param>
     /// <param name="valueSelector">A projection function to obtain the child collections.</param>
+    /// <typeparam name="TKey">The type of the key by which the collections will be grouped.</typeparam>
+    /// <typeparam name="TValue">The type of the objects, contained in the grouped collections.</typeparam>
     public static IGroupedCollection<TKey, TValue> ToGroupedCollection<TKey, TValue>(this IQueryable<TKey> collection, Func<TKey, IQueryable<TValue>> valueSelector)
         where TKey : RealmObject
         where TValue : RealmObject
@@ -51,6 +53,8 @@ public static class ExtensionMethods
     /// <returns>The grouped collection.</returns>
     /// <param name="collection">The query to group.</param>
     /// <param name="valueSelector">A projection function to obtain the child collections.</param>
+    /// <typeparam name="TKey">The type of the key by which the collections will be grouped.</typeparam>
+    /// <typeparam name="TValue">The type of the objects, contained in the grouped collections.</typeparam>
     public static IGroupedCollection<TKey, TValue> ToGroupedCollection<TKey, TValue>(this IQueryable<TKey> collection, Func<TKey, IList<TValue>> valueSelector)
         where TKey : RealmObject
         where TValue : RealmObject
@@ -64,6 +68,8 @@ public static class ExtensionMethods
     /// <returns>The grouped collection.</returns>
     /// <param name="collection">The list to group.</param>
     /// <param name="valueSelector">A projection function to obtain the child collections.</param>
+    /// <typeparam name="TKey">The type of the key by which the collections will be grouped.</typeparam>
+    /// <typeparam name="TValue">The type of the objects, contained in the grouped collections.</typeparam>
     public static IGroupedCollection<TKey, TValue> ToGroupedCollection<TKey, TValue>(this IList<TKey> collection, Func<TKey, IQueryable<TValue>> valueSelector)
         where TKey : RealmObject
         where TValue : RealmObject
@@ -77,6 +83,8 @@ public static class ExtensionMethods
     /// <returns>The grouped collection.</returns>
     /// <param name="collection">The list to group.</param>
     /// <param name="valueSelector">A projection function to obtain the child collections.</param>
+    /// <typeparam name="TKey">The type of the key by which the collections will be grouped.</typeparam>
+    /// <typeparam name="TValue">The type of the objects, contained in the grouped collections.</typeparam>
     public static IGroupedCollection<TKey, TValue> ToGroupedCollection<TKey, TValue>(this IList<TKey> collection, Func<TKey, IList<TValue>> valueSelector)
         where TKey : RealmObject
         where TValue : RealmObject
