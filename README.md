@@ -92,3 +92,7 @@ Then, the grouping goes from the general to the specific:
 IQueryable<School> schools = realm.All<School>();
 var groupedStudents = schools.ToGroupedCollection(s => s.Students);
 ```
+
+## License
+
+This project is released under the [MIT license](https://github.com/realm/realm-dotnet-groupedcollection/blob/master/LICENSE).
