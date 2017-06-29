@@ -5,6 +5,8 @@ to data bindable grouped collections that can be passed directly to a [Xamarin.F
 
 ## Getting started
 
+Just add the [Realm.GroupedCollection](https://www.nuget.org/packages/Realm.GroupedCollection) package to your project.
+
 ## Sample usage
 
 ```csharp
