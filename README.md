@@ -52,7 +52,7 @@ Both the returned collection and the inner collections are observable, so any ch
 ### Queries
 
 ```csharp
-// Return schools ordered by Name, containing Students ordered, again by Age
+// Return schools ordered by Name, containing Students ordered by Age
 var students = realm.All<School>().OrderBy(school => school.Name)
                     .ToGroupedCollection(school => school.Students.OrderBy(student => student.Age));
 ```
