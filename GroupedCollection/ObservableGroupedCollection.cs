@@ -82,35 +82,37 @@ namespace Realms.GroupedCollection
 
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (typeof(TKey) != typeof(TValue))
-            {
-                // The parent collection has changed - since this could reorder children, raise Reset to avoid
-                // inconsistencies.
-                RaiseCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-                return;
-            }
-
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Move:
-                    var moves = e.NewItems.Cast<TKey>().Select(_converter).ToArray();
-                    var moveArgs = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Move, moves, e.NewStartingIndex, e.OldStartingIndex);
-                    RaiseCollectionChanged(moveArgs);
-                    break;
-                case NotifyCollectionChangedAction.Add:
-                    var adds = e.NewItems.Cast<TKey>().Select(_converter).ToArray();
-                    var addArgs = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, adds, e.NewStartingIndex);
-                    RaiseCollectionChanged(addArgs);
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    var removes = e.OldItems.Cast<TKey>().Select(_ => default(TValue)).ToArray();
-                    var removeArgs = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removes, e.OldStartingIndex);
-                    RaiseCollectionChanged(removeArgs);
-                    break;
-                default:
-                    RaiseCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-                    break;
-            }
+			RaiseCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+			// TODO: The below logic doesn't correctly handle all corner cases. Revisit at some point.
+			// if (typeof(TKey) != typeof(TValue))
+            // {
+            //     // The parent collection has changed - since this could reorder children, raise Reset to avoid
+            //     // inconsistencies.
+            //     RaiseCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            //     return;
+            // }
+			// 
+			// switch (e.Action)
+            // {
+            //     case NotifyCollectionChangedAction.Move:
+            //         var moves = e.NewItems.Cast<TKey>().Select(_converter).ToArray();
+            //         var moveArgs = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Move, moves, e.NewStartingIndex, e.OldStartingIndex);
+            //         RaiseCollectionChanged(moveArgs);
+            //         break;
+            //     case NotifyCollectionChangedAction.Add:
+            //         var adds = e.NewItems.Cast<TKey>().Select(_converter).ToArray();
+            //         var addArgs = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, adds, e.NewStartingIndex);
+            //         RaiseCollectionChanged(addArgs);
+            //         break;
+            //     case NotifyCollectionChangedAction.Remove:
+            //         var removes = e.OldItems.Cast<TKey>().Select(_ => default(TValue)).ToArray();
+            //         var removeArgs = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removes, e.OldStartingIndex);
+            //         RaiseCollectionChanged(removeArgs);
+            //         break;
+            //     default:
+            //         RaiseCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            //         break;
+            // }
         }
 
         protected void RaisePropertyChanged(PropertyChangedEventArgs args)
