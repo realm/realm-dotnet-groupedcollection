@@ -4,7 +4,7 @@
 		<TargetFramework>netstandard1.0</TargetFramework>
 		<PackOnBuild>true</PackOnBuild>
 		<PackageId>Realm.GroupedCollection</PackageId>
-		<PackageVersion>0.0.3</PackageVersion>
+		<PackageVersion>0.1.0</PackageVersion>
 		<Authors>Realm</Authors>
 		<NeutralLanguage>en</NeutralLanguage>
 		<Owners>Realm</Owners>
